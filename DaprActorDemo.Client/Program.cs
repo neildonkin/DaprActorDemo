@@ -37,6 +37,9 @@ namespace DaprActorDemo.Client
                 Console.WriteLine("Store created");
             }
 
+            // Un-register any previous reminders
+            await proxy.UnregisterReminder();
+            
             var savedData = await proxy.GetDataAsync();
             Console.WriteLine(savedData);
             
