@@ -43,6 +43,12 @@ namespace DaprActorDemo.Client
             
             /*****************************************
              *
+             * Register the store actor reminder
+             */
+            await proxy.RegisterReminder();
+            
+            /*****************************************
+             *
              * Record some sales
              */
             var salesData = new float[]
