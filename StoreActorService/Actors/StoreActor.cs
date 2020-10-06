@@ -10,7 +10,7 @@ namespace StoreActorService.Actors
     
     {
         /// <summary>
-        /// Initializes a new instance of MyActor
+        /// Initializes a new instance of StoreActor
         /// </summary>
         /// <param name="actorService">The Dapr.Actors.Runtime.ActorService that will host this actor instance.</param>
         /// <param name="actorId">The Dapr.Actors.ActorId for this actor instance.</param>
@@ -41,9 +41,9 @@ namespace StoreActorService.Actors
         }
 
         /// <summary>
-        /// Set MyData into actor's private state store
+        /// Set store data into actor's private state store
         /// </summary>
-        /// <param name="data">the user-defined MyData which will be stored into state store as "store_info" state</param>
+        /// <param name="data">the user-defined store data which will be stored into state store as "store_info" state</param>
         public async Task<string> SetDataAsync(StoreInfo data)
         {
             // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
@@ -67,24 +67,24 @@ namespace StoreActorService.Actors
         }
 
         /// <summary>
-        /// Register MyReminder reminder with the actor
+        /// Register TestStoreReminder reminder with the actor
         /// </summary>
         public async Task RegisterReminder()
         {
             await this.RegisterReminderAsync(
-                "MyReminder",              // The name of the reminder
+                "TestStoreReminder",              // The name of the reminder
                 null,                      // User state passed to IRemindable.ReceiveReminderAsync()
                 TimeSpan.FromSeconds(5),   // Time to delay before invoking the reminder for the first time
                 TimeSpan.FromSeconds(5));  // Time interval between reminder invocations after the first invocation
         }
 
         /// <summary>
-        /// Unregister MyReminder reminder with the actor
+        /// Unregister TestStoreReminder reminder with the actor
         /// </summary>
         public Task UnregisterReminder()
         {
-            Console.WriteLine("Unregistering MyReminder...");
-            return this.UnregisterReminderAsync("MyReminder");
+            Console.WriteLine("Unregistering TestStoreReminder...");
+            return this.UnregisterReminderAsync("TestStoreReminder");
         }
 
         // <summary>
