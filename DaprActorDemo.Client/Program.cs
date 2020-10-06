@@ -30,6 +30,23 @@ namespace DaprActorDemo.Client
 
             var savedData = await proxy.GetDataAsync();
             Console.WriteLine(savedData);
+            
+            
+            /*****************************************
+             *
+             * Record a sale
+             */
+            var totalSales = await proxy.RegisterPurchase((float)1.37);
+            Console.WriteLine($"Total sales: {totalSales}");
+
+
+
+            /********************************************
+             *
+             * Read key to exit
+             */
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
     }
 }

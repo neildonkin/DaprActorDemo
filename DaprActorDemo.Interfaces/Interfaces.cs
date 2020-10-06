@@ -12,6 +12,8 @@ namespace DaprActorDemo.Interfaces
         Task UnregisterReminder();
         Task RegisterTimer();
         Task UnregisterTimer();
+
+        Task<float> RegisterPurchase(float amount);
     }
 
     public class StoreInfo
@@ -27,10 +29,5 @@ namespace DaprActorDemo.Interfaces
         public string Telephone { get; set; }
 
         public float TotalPurchases { get; set; }
-        
-        public void RegisterPurchase(float amount)
-        {
-            this.TotalPurchases += amount;
-        }
     }
 }

@@ -119,6 +119,17 @@ namespace StoreActorService.Actors
             return this.UnregisterTimerAsync("MyTimer");
         }
 
+        public async Task<float> RegisterPurchase(float amount)
+        {
+            var storeState = await this.GetDataAsync();
+
+            storeState.TotalPurchases += amount;
+            
+            await this.SetDataAsync(storeState);
+
+            return storeState.TotalPurchases;
+        }
+
         /// <summary>
         /// Timer callback once timer is expired
         /// </summary>
