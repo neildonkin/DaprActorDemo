@@ -25,5 +25,12 @@ namespace DaprActorDemo.Interfaces
         public string Address { get; set; }
 
         public string Telephone { get; set; }
+
+        public float TotalPurchases { get; set; }
+        
+        public void RegisterPurchase(float amount)
+        {
+            this.TotalPurchases += amount;
+        }
     }
 }
