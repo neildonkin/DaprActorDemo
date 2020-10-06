@@ -9,7 +9,6 @@ namespace DaprActorDemo.Client
 {
     class Program
     {
-        // NOTE: you must run this console app once to create the default actor
         public static async Task Main(string[] args)
         {
             var actorType = "StoreActor";      // Registered Actor Type in Actor Service
@@ -34,19 +33,32 @@ namespace DaprActorDemo.Client
             
             /*****************************************
              *
-             * Record a sale
+             * Record some sales
              */
-            var totalSales = await proxy.RegisterPurchase((float)1.37);
-            Console.WriteLine($"Total sales: {totalSales}");
+            var salesData = new float[]
+            {
+                1.37f,
+                2.24f,
+                3.99f
+            };
+            
+            foreach (var thisSale in salesData)
+            {
+                Console.WriteLine($"Registering sale: {thisSale}");
+                var totalSales = await proxy.RegisterPurchase(thisSale);
+                
+            }
+
+            var storeState = await proxy.GetDataAsync();
+            Console.WriteLine($"Total sales: {storeState.TotalPurchases}");
 
 
 
             /********************************************
              *
-             * Read key to exit
+             * Finished
              */
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
+            Console.WriteLine("Store Actor demo finished");
         }
     }
 }
