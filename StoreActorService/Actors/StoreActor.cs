@@ -6,6 +6,7 @@ using DaprActorDemo.Interfaces;
 
 namespace StoreActorService.Actors
 {
+    // [Actor(TypeName = "MyStoreActorTypeName")] - you can specify a custom name for the actor
     public class StoreActor : Actor, IStoreActor, IRemindable // NOTE: Reminders are optional
     
     {
