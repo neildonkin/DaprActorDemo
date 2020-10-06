@@ -35,10 +35,6 @@ namespace StoreActorService
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
         }
     }
 }
