@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapr.Actors;
 using Dapr.Actors.Client;
@@ -14,18 +15,27 @@ namespace DaprActorDemo.Client
             var actorType = "StoreActor";      // Registered Actor Type in Actor Service
             var actorId = new ActorId("1");
 
-            // Create the local proxy by using the same interface that the service implements
-            // By using this proxy, you can call strongly typed methods on the interface using Remoting.
+            // Create a proxy that will access the actor
             var proxy = ActorProxy.Create<IStoreActor>(actorId, actorType);
-            var response = await proxy.SetDataAsync(new StoreInfo()
-            {
-                Address = "1 Main Street, London, W1",
-                Latitude = 123456,
-                Longitude = 67890,
-                Telephone = "0171 123 4567"
-            });
             
-            Console.WriteLine(response);
+            // See if the store actor already exists
+            try
+            {
+                var temp = await proxy.GetDataAsync();
+            }
+            catch (Exception)
+            {
+                // The store actor doesn't exist yet, so create it
+                var response = await proxy.SetDataAsync(new StoreInfo()
+                {
+                    Address = "1 Main Street, London, W1",
+                    Latitude = 123456,
+                    Longitude = 67890,
+                    Telephone = "0171 123 4567"
+                });
+                
+                Console.WriteLine("Store created");
+            }
 
             var savedData = await proxy.GetDataAsync();
             Console.WriteLine(savedData);
