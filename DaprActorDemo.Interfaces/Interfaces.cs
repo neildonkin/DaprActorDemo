@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Dapr.Actors;
 
 namespace DaprActorDemo.Interfaces
 {
-    public interface IStoreActor
+    public interface IStoreActor : IActor
     {
         Task<string> SetDataAsync(StoreInfo data);
         Task<StoreInfo> GetDataAsync();
