@@ -43,15 +43,15 @@ namespace StoreActorService.Actors
         /// <summary>
         /// Set MyData into actor's private state store
         /// </summary>
-        /// <param name="data">the user-defined MyData which will be stored into state store as "my_data" state</param>
+        /// <param name="data">the user-defined MyData which will be stored into state store as "store_info" state</param>
         public async Task<string> SetDataAsync(StoreInfo data)
         {
             // Data is saved to configured state store implicitly after each method execution by Actor's runtime.
             // Data can also be saved explicitly by calling this.StateManager.SaveStateAsync();
             // State to be saved must be DataContract serializable.
             await this.StateManager.SetStateAsync<StoreInfo>(
-                "my_data",  // state name
-                data);      // data saved for the named state "my_data"
+                "store_info",  // state name
+                data);      // data saved for the named state "store_info"
 
             return "Success";
         }
@@ -59,11 +59,11 @@ namespace StoreActorService.Actors
         /// <summary>
         /// Get StoreInfo from actor's private state store
         /// </summary>
-        /// <return>the user-defined StoreInfo which is stored into state store as "my_data" state</return>
+        /// <return>the user-defined StoreInfo which is stored into state store as "store_info" state</return>
         public Task<StoreInfo> GetDataAsync()
         {
             // Gets state from the state store.
-            return this.StateManager.GetStateAsync<StoreInfo>("my_data");
+            return this.StateManager.GetStateAsync<StoreInfo>("store_info");
         }
 
         /// <summary>
