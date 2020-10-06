@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapr.Actors.AspNetCore;
+using Dapr.Actors.Runtime;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,16 @@ namespace StoreActorService
                         .UseActors(actorRuntime =>
                         {
                             // Register MyActor actor type
-                            actorRuntime.RegisterActor<StoreActor>();
+
+                            // Actors with no constructor dependency arguments can be registered like this
+                            // actorRuntime.RegisterActor<StoreActor>();
+                            
+                            // If you want to inject a dependency into an Actor, use this method
+                            // TODO: inject ILogger into StoreActor
+                            actorRuntime.RegisterActor<StoreActor>((type) =>
+                                new ActorService(type,
+                                    (actorService, actorId) =>
+                                        new StoreActor(actorService, actorId)));
                         })
                         .UseUrls($"http://localhost:{AppChannelHttpPort}/");
                 });
