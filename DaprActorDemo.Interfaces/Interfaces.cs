@@ -18,8 +18,6 @@ namespace DaprActorDemo.Interfaces
 
     public class StoreInfo
     {
-        public string Id { get; set; }
-        
         public int Latitude { get; set; }
 
         public int Longitude { get; set; }
