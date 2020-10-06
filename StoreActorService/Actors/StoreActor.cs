@@ -91,10 +91,12 @@ namespace StoreActorService.Actors
         // <summary>
         // Implement IRemindeable.ReceiveReminderAsync() which is call back invoked when an actor reminder is triggered.
         // </summary>
-        public Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
+        public async Task ReceiveReminderAsync(string reminderName, byte[] state, TimeSpan dueTime, TimeSpan period)
         {
-            Console.WriteLine($"ReceiveReminderAsync is called on {DateTime.Now}");
-            return Task.CompletedTask;
+            Console.WriteLine($"ReceiveReminderAsync is called on {DateTime.Now} for reminder {reminderName}");
+            var storeState = await this.GetDataAsync();
+            
+            Console.WriteLine($"Store {this.Id} total purchases {storeState.TotalPurchases}");
         }
 
         /// <summary>
