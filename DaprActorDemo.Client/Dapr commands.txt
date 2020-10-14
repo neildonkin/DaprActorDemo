@@ -1,0 +1,3 @@
+NOTE: you must be in the DaprActorDemo.Client folder for this to work
+
+dapr run --app-id actor-client dotnet run
